@@ -9,23 +9,29 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] protected float LinearSpeed = 5f;
 
     //-------- CLASS VARIABLES --------//
-    Rigidbody2D _rb;
-    Animator _animator;
+    private Rigidbody2D _rb;
+    private Vector2 _lastMoveDirection;
+
+    //--------- PROTECTED VARIABLES ---------//
+    protected Animator animator;
 
     //--------- UNITY METHODS ---------//
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void Update()
     {
+        animator.SetFloat("HorizontalVelocity", _lastMoveDirection.x);
+        animator.SetFloat("VerticalVelocity", _lastMoveDirection.y);
     }
 
     //--------- PROTECTED METHODS ---------//
     protected virtual void Move(Vector2 direction)
     {
         _rb.position += LinearSpeed * Time.deltaTime * direction;
+        _lastMoveDirection = direction;
     }
 }
