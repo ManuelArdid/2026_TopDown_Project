@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : IVisible2D
+public class Coin : MonoBehaviour,IVisible2D
 {
     public int GetPriority()
     {
