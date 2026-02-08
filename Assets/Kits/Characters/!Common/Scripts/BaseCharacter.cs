@@ -34,4 +34,10 @@ public class BaseCharacter : MonoBehaviour
         _rb.position += LinearSpeed * Time.deltaTime * direction;
         _lastMoveDirection = direction;
     }
+
+    protected internal virtual void NotifyPunch()
+    {
+        Debug.Log($"{gameObject.name} has been punched!", gameObject);
+        Destroy(gameObject);
+    }
 }

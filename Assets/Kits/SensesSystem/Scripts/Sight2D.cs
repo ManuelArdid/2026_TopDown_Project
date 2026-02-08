@@ -34,7 +34,7 @@ public class Sight2D : MonoBehaviour
                     _closestPlayer = colliders[i].transform;
                 }
             }
-            Debug.Log($"El collider {i} se llama {colliders[i].name}.", colliders[i]);
+            //Debug.Log($"El collider {i} se llama {colliders[i].name}.", colliders[i]);
         }
     }
 
