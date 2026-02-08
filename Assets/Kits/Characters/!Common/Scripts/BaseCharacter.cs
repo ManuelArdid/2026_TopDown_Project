@@ -2,6 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Collider2D))]
 public class BaseCharacter : MonoBehaviour
 {
     //--------- UNITY EDITOR ---------//
