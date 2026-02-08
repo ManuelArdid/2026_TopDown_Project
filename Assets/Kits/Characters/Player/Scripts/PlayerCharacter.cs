@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Life))]
 public class PlayerCharacter : BaseCharacter
 {
 
@@ -17,14 +18,17 @@ public class PlayerCharacter : BaseCharacter
 
     //-------- CLASS VARIABLES --------//
     private Vector2 _rawMove;
+    private Vector2 _punchDirection = Vector2.down;
+
+    private Life _life;
 
     private bool _mustPunch;
-    private Vector2 _punchDirection = Vector2.down;
 
     //--------- UNITY METHODS ---------//
     protected override void Awake()
     {
         base.Awake();
+        _life = GetComponent<Life>();
     }
 
     void OnEnable()
@@ -52,6 +56,16 @@ public class PlayerCharacter : BaseCharacter
         {
             PerformPunch();
             _mustPunch = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Drop drop = collision.GetComponent<Drop>();
+        if (drop)
+        {
+            _life.RecoverHealth(drop.DropDefinition.HealthRecovery);
+            drop.NotifyPickUp();
         }
     }
 

@@ -9,11 +9,11 @@ public class Life : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private float DebugHitDamage = 0.1f;
-    [SerializeField] private bool DebugReceiveHit = false;
+    [SerializeField] private bool DebugReceiveHit;
 
     ///EVENTS
-    [SerializeField] private UnityEvent<float> OnLifeChanged;
-    [SerializeField] private UnityEvent OnDeath;
+    [SerializeField] public UnityEvent<float> OnLifeChanged;
+    [SerializeField] public UnityEvent OnDeath;
 
     //-------- CLASS VARIABLES --------//
     private float _currentLife;
@@ -39,12 +39,23 @@ public class Life : MonoBehaviour
         if (_currentLife > 0f)
         {
             _currentLife -= damage;
-            OnLifeChanged?.Invoke(_currentLife);
-            
+            OnLifeChanged.Invoke(_currentLife);
+
             if (_currentLife <= 0f)
             {
-                OnDeath?.Invoke();
+                OnDeath.Invoke();
             }
+        }
+    }
+
+    //--------- INTERNAL METHODS ---------//
+    internal void RecoverHealth(float healthRecovery)
+    {
+        if (_currentLife > 0f)
+        {
+            _currentLife += healthRecovery;
+            _currentLife = Mathf.Clamp(_currentLife, 0f, StartingLife);
+            OnLifeChanged.Invoke(_currentLife);
         }
     }
 }

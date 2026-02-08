@@ -1,16 +1,33 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LifeBar : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //--------- UNITY EDITOR ---------//
+    [SerializeField] Image imageFill;
+    [SerializeField] Life life;
+
+    //--------- UNITY METHODS ---------//
+    private void OnEnable()
     {
-        
+        life.OnLifeChanged.AddListener(LifeChangeHandler);
+        life.OnDeath.AddListener(OnDeathHandler);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        life.OnLifeChanged.RemoveListener(LifeChangeHandler);
+        life.OnDeath.RemoveListener(OnDeathHandler);
+    }
+
+    //--------- PUBLIC METHODS ---------//
+    public void LifeChangeHandler(float currentLife)
+    {
+        imageFill.fillAmount = currentLife;
+    }
+
+    public void OnDeathHandler()
+    {
+        Destroy(gameObject);
     }
 }
