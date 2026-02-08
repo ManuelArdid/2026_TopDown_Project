@@ -452,7 +452,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1869315837
   m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1960546628078278901, guid: 5e79e795c5b34344b83acd44165da813,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -493,8 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacter
   LinearSpeed: 5
-  Priority: 0
-  Side: 2
+  Priority: 1
+  Side: 0
   MoveInputAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100,
     type: 3}
   PunchInputAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100,
@@ -655,7 +655,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1869315837
   m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 3112702236248781428, guid: 5e79e795c5b34344b83acd44165da813,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -695,7 +695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36245e14ce8f95e47b8f57e8ca3b46df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Sight2D
-  radius: 5
+  Radius: 5
+  VisibleSides: 0000000002000000
 --- !u!114 &921726857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,7 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseSkeleton
   LinearSpeed: 3
   Priority: 0
-  Side: 2
+  Side: 1
 --- !u!95 &921726858
 Animator:
   serializedVersion: 7
@@ -3367,12 +3368,12 @@ PrefabInstance:
     - target: {fileID: 5458261646766927731, guid: 055161a20a6159549ad37148ece381a1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.62753
+      value: 3.57
       objectReference: {fileID: 0}
     - target: {fileID: 5458261646766927731, guid: 055161a20a6159549ad37148ece381a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2617
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5458261646766927731, guid: 055161a20a6159549ad37148ece381a1,
         type: 3}

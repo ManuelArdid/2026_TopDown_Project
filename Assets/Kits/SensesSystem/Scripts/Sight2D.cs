@@ -2,58 +2,88 @@ using UnityEngine;
 
 public class Sight2D : MonoBehaviour
 {
-    [SerializeField] float radius = 5f;
-    //[SerializeField] float checkFrecuency = 5f;
+    //--------- UNITY EDITOR ---------//
+    [SerializeField] float Radius = 5f;
+    [Space]
+    [SerializeField] IVisible2D.Side[] VisibleSides;
 
+    //-------- CLASS VARIABLES --------//
+    private float _lastCheckTime;
+    private float _distanceToClosestTarget;
+    private float _priorityOfClosestTarget = -1;
 
-    private float lastCheckTime;
-    private Transform _closestPlayer;
-    private float _distanceToClosestPlayer;
+    private Collider2D[] _colliders;
 
-    Collider2D[] colliders;
-    // Update is called once per frame
+    private Transform _closestTarget;
+
+    //--------- UNITY METHODS ---------//
     void Update()
     {
-        if ((Time.time - lastCheckTime) > (1f / lastCheckTime))
+        if ((Time.time - _lastCheckTime) > (1f / _lastCheckTime))
         {
-            lastCheckTime = Time.time;
+            _lastCheckTime = Time.time;
         }
 
-        colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        _colliders = Physics2D.OverlapCircleAll(transform.position, Radius);
 
-        _distanceToClosestPlayer = Mathf.Infinity;
-        _closestPlayer = null;
-        for (int i = 0; i < colliders.Length; i++)
+        _distanceToClosestTarget = Mathf.Infinity;
+        _closestTarget = null;
+        for (int i = 0; i < _colliders.Length; i++)
         {
-            if (colliders[i].CompareTag("Player"))
+            IVisible2D visible = _colliders[i].GetComponent<IVisible2D>();
+            if (visible != null && CanSee(visible))
             {
-                float distanceToPlayer = Vector2.Distance(transform.position, colliders[i].transform.position);
-                if (distanceToPlayer < _distanceToClosestPlayer)
+                float distanceToTarget = Vector2.Distance(transform.position, _colliders[i].transform.position);
+                if (
+                    (visible.GetPriority() > _priorityOfClosestTarget) ||                                               // if the visible has higher priority than the current closest target,
+                                                                                                                        // it becomes the new closest target, regardless of the distance to the player
+
+                    ((visible.GetPriority() == _priorityOfClosestTarget) && (distanceToTarget <= _distanceToClosestTarget))  // if the visible has the same priority as the current closest target,
+                                                                                                                             // it becomes the new closest target only if it's closer to the player than the
+                                                                                                                             // current closest target
+                    )
                 {
-                    _distanceToClosestPlayer = distanceToPlayer;
-                    _closestPlayer = colliders[i].transform;
+                    _priorityOfClosestTarget = visible.GetPriority();
+                    _distanceToClosestTarget = distanceToTarget;
+                    _closestTarget = _colliders[i].transform;
                 }
+
             }
-            //Debug.Log($"El collider {i} se llama {colliders[i].name}.", colliders[i]);
+            //Debug.Log($"El collider {i} se llama {_colliders[i].name}.", _colliders[i]);
         }
     }
 
+    //--------- PUBLIC METHODS ---------//
+
     public Transform GetClosestTarget()
     {
-        return _closestPlayer;
+        return _closestTarget;
     }
 
     public bool IsPlayerInSight()
     {
         bool isPlayerInSight = false;
 
-        colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        _colliders = Physics2D.OverlapCircleAll(transform.position, Radius);
 
-        for (int i = 0; !isPlayerInSight && (i < colliders.Length); i++)
+        for (int i = 0; !isPlayerInSight && (i < _colliders.Length); i++)
         {
-            if (colliders[i].CompareTag("Player"))
-            { isPlayerInSight = true; }
+            if (_colliders[i].CompareTag("Player"))
+                isPlayerInSight = true;
         }
         return isPlayerInSight;
+    }
+
+    //--------- PRIVATE METHODS ---------//
+    private bool CanSee(IVisible2D visible)
+    {
+        bool canSee = false;
+
+        for (int i = 0; !canSee && (i < VisibleSides.Length); i++)
+        {
+            canSee = visible.GetSide() == VisibleSides[i];
+        }
+
+        return canSee;
     }
 }
