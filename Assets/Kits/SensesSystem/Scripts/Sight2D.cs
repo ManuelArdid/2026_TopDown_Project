@@ -28,6 +28,7 @@ public class Sight2D : MonoBehaviour
 
         _distanceToClosestTarget = Mathf.Infinity;
         _closestTarget = null;
+        _priorityOfClosestTarget = -1;
         for (int i = 0; i < _colliders.Length; i++)
         {
             IVisible2D visible = _colliders[i].GetComponent<IVisible2D>();
