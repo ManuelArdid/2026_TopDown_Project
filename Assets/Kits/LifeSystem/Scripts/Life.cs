@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Life : MonoBehaviour
 {
@@ -10,13 +11,18 @@ public class Life : MonoBehaviour
     [SerializeField] private float DebugHitDamage = 0.1f;
     [SerializeField] private bool DebugReceiveHit = false;
 
+    ///EVENTS
+    [SerializeField] private UnityEvent<float> OnLifeChanged;
+    [SerializeField] private UnityEvent OnDeath;
+
     //-------- CLASS VARIABLES --------//
     private float _currentLife;
 
     //--------- UNITY METHODS ---------//
     void OnValidate()
     {
-        if (DebugReceiveHit){
+        if (DebugReceiveHit)
+        {
             DebugReceiveHit = false;
             OnHitReceived(DebugHitDamage);
         }
@@ -33,12 +39,13 @@ public class Life : MonoBehaviour
         if (_currentLife > 0f)
         {
             _currentLife -= damage;
+            OnLifeChanged?.Invoke(_currentLife);
+            
             if (_currentLife <= 0f)
             {
-                Debug.Log($"{gameObject.name} has died!", gameObject);
+                OnDeath?.Invoke();
             }
         }
     }
 }
-
 
