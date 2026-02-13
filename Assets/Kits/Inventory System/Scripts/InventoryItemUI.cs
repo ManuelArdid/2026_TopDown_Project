@@ -1,0 +1,80 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class InventoryItemUI : MonoBehaviour
+{
+    //-------- UNITY EDITOR ------------//
+    [SerializeField] private InventoryItemDefinition _itemDefinition;
+
+    //-------- CLASS VARIABLES --------//
+    private Button[] _buttons;
+    private Image _itemImage;
+    private TMP_Text _itemNameText;
+
+    //-------- ENUMS --------//
+    enum ButtonAction
+    {
+        Discard,
+        Use,
+        Give,
+        Sell
+    }
+
+    //-------- UNITY METHODS --------//
+    void Awake()
+    {
+        _buttons = GetComponentsInChildren<Button>();
+        _itemImage = GetComponentInChildren<Image>();
+        _itemNameText = GetComponentInChildren<TMP_Text>();
+    }
+
+    void Start()
+    {
+        Init(_itemDefinition);
+    }
+
+    void OnEnable()
+    {
+        _buttons[(int)ButtonAction.Discard].onClick.AddListener(OnDiscard);
+        _buttons[(int)ButtonAction.Use].onClick.AddListener(OnUse);
+        _buttons[(int)ButtonAction.Give].onClick.AddListener(OnGive);
+        _buttons[(int)ButtonAction.Sell].onClick.AddListener(OnSell);
+    }
+
+    void OnDisable()
+    {
+        _buttons[(int)ButtonAction.Discard].onClick.RemoveListener(OnDiscard);
+        _buttons[(int)ButtonAction.Use].onClick.RemoveListener(OnUse);
+        _buttons[(int)ButtonAction.Give].onClick.RemoveListener(OnGive);
+        _buttons[(int)ButtonAction.Sell].onClick.RemoveListener(OnSell);
+    }
+
+    //-------- PUBLIC METHODS --------//
+    public void Init(InventoryItemDefinition definition)
+    {
+        _itemImage.sprite = definition.Image;
+        _itemNameText.text = definition.ItemName;
+    }
+
+    //-------- PRIVATE METHODS --------//
+    private void OnDiscard()
+    {
+        Debug.Log("OnDiscard", gameObject);
+    }
+
+    private void OnUse()
+    {
+        Debug.Log("OnUse", gameObject);
+    }
+
+    private void OnGive()
+    {
+        Debug.Log("OnGive", gameObject);
+    }
+
+    private void OnSell()
+    {
+        Debug.Log("OnSell", gameObject);
+    }
+}
