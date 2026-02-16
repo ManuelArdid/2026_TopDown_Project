@@ -5,12 +5,13 @@ using TMPro;
 public class InventoryItemUI : MonoBehaviour
 {
     //-------- UNITY EDITOR ------------//
-    [SerializeField] private InventoryItemDefinition _itemDefinition;
+    [SerializeField] private InventoryItemDefinition ItemDefinition;
 
     //-------- CLASS VARIABLES --------//
     private Button[] _buttons;
     private Image _itemImage;
     private TMP_Text _itemNameText;
+    private InventoryUI _inventoryUI;
 
     //-------- ENUMS --------//
     enum ButtonAction
@@ -27,11 +28,14 @@ public class InventoryItemUI : MonoBehaviour
         _buttons = GetComponentsInChildren<Button>();
         _itemImage = GetComponentInChildren<Image>();
         _itemNameText = GetComponentInChildren<TMP_Text>();
+        _inventoryUI = GetComponentInParent<InventoryUI>();
+
+        ItemDefinition = Instantiate(ItemDefinition);
     }
 
     void Start()
     {
-        Init(_itemDefinition);
+        Init(ItemDefinition);
     }
 
     void OnEnable()
@@ -65,7 +69,13 @@ public class InventoryItemUI : MonoBehaviour
 
     private void OnUse()
     {
-        Debug.Log("OnUse", gameObject);
+        _inventoryUI.NotifyItemUsed(ItemDefinition);
+        ItemDefinition.NumUses--;
+
+        if (ItemDefinition.NumUses <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnGive()

@@ -8,6 +8,7 @@ public class InventoryUI : MonoBehaviour
     //-------- UNITY EDITOR ------------//
 
     [SerializeField] private GameObject InventoryItemPrefab;
+    [SerializeField] private PlayerCharacter Owner;
 
     //-------- CLASS VARIABLES --------//
 
@@ -33,5 +34,10 @@ public class InventoryUI : MonoBehaviour
     {
         GameObject item = Instantiate(InventoryItemPrefab, _grid.transform);
         item.GetComponent<InventoryItemUI>().Init(itemDefinition);
+    }
+
+    public void NotifyItemUsed(InventoryItemDefinition itemDefinition)
+    {
+        Owner.NotifyInventoryItemUsed(itemDefinition);
     }
 }

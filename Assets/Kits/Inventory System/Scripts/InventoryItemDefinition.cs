@@ -7,4 +7,6 @@ public class InventoryItemDefinition : ScriptableObject
     public string ItemName;
     public float HealthRecovery;
     public int Bullets;
+
+    public int NumUses = 1;
 }

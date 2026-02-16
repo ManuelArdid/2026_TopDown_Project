@@ -87,6 +87,14 @@ public class PlayerCharacter : BaseCharacter
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, _punchDirection * PunchRange);
     }
+
+    //--------- PUBLIC METHODS ---------//
+
+    public void NotifyInventoryItemUsed(InventoryItemDefinition itemDefinition)
+    {
+        _life.RecoverHealth(itemDefinition.HealthRecovery);
+    }
+
     //--------- PROTECTED METHODS ---------//
 
     protected void OnMove(InputAction.CallbackContext context)
