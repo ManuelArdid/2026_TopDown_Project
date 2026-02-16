@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ public class InventoryUI : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         Instance = this;
         _grid = GetComponentInChildren<GridLayoutGroup>();
     }
@@ -39,5 +40,22 @@ public class InventoryUI : MonoBehaviour
     public void NotifyItemUsed(InventoryItemDefinition itemDefinition)
     {
         Owner.NotifyInventoryItemUsed(itemDefinition);
+    }
+
+    public bool Contains(InventoryItemDefinition itemDefinition)
+    {
+        InventoryItemUI[] items = GetComponentsInChildren<InventoryItemUI>();
+        return Array.Find(items, item => item.ItemDefinition.UniqueItemName == itemDefinition.UniqueItemName) != null;
+    }
+
+    public void Consume(InventoryItemDefinition itemDefinition)
+    {
+        InventoryItemUI[] items = GetComponentsInChildren<InventoryItemUI>();
+        InventoryItemUI item = Array.Find(items, item => item.ItemDefinition.UniqueItemName == itemDefinition.UniqueItemName);
+        item.ItemDefinition.NumUses--;
+        if (item.ItemDefinition.NumUses <= 0)
+        {
+            Destroy(item.gameObject);
+        }
     }
 }

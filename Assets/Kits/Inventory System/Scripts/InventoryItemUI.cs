@@ -5,7 +5,7 @@ using TMPro;
 public class InventoryItemUI : MonoBehaviour
 {
     //-------- UNITY EDITOR ------------//
-    [SerializeField] private InventoryItemDefinition ItemDefinition;
+    [SerializeField] public InventoryItemDefinition ItemDefinition;
 
     //-------- CLASS VARIABLES --------//
     private Button[] _buttons;
@@ -29,9 +29,7 @@ public class InventoryItemUI : MonoBehaviour
         _itemImage = GetComponentInChildren<Image>();
         _itemNameText = GetComponentInChildren<TMP_Text>();
         _inventoryUI = GetComponentInParent<InventoryUI>();
-
-        ItemDefinition = Instantiate(ItemDefinition);
-    }
+   }
 
     void Start()
     {
@@ -57,8 +55,9 @@ public class InventoryItemUI : MonoBehaviour
     //-------- PUBLIC METHODS --------//
     public void Init(InventoryItemDefinition definition)
     {
+        ItemDefinition = Instantiate(definition);
         _itemImage.sprite = definition.Image;
-        _itemNameText.text = definition.ItemName;
+        _itemNameText.text = definition.UniqueItemName;
     }
 
     //-------- PRIVATE METHODS --------//

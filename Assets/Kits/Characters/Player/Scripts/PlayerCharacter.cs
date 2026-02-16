@@ -118,7 +118,7 @@ public class PlayerCharacter : BaseCharacter
         foreach (RaycastHit2D hit in hits)
         {
             BaseCharacter otherCharacter = hit.collider.GetComponent<BaseCharacter>();
-            if (otherCharacter != this)
+            if (otherCharacter != this && otherCharacter != null)
                 otherCharacter.NotifyPunch();
         }
     }
