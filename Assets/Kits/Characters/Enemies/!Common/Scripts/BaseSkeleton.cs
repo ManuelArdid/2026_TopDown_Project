@@ -5,24 +5,26 @@ public class BaseSkeleton : BaseCharacter
 {
 
     //--------- UNITY EDITOR ---------//
-    [SerializeField] private float ContactDamage = 0.2f;
-    [SerializeField] private float DamageCooldown = 1f;
+    [SerializeField] protected float ContactDamage = 0.2f;
+    [SerializeField] protected float DamageCooldown = 1f;
 
     //--------- CLASS VARIABLES ---------//
-    Sight2D _sight;
     float _nextDamageTime;
+
+    //--------- PROTECTED VARIABLES ---------//
+    protected Sight2D sight;
 
     //--------- UNITY METHODS ---------//
     protected override void Awake()
     {
         base.Awake();
-        _sight = GetComponent<Sight2D>();
+        sight = GetComponent<Sight2D>();
     }
 
     protected override void Update()
     {
         base.Update();
-        Transform closestTarget = _sight.GetClosestTarget();
+        Transform closestTarget = sight.GetClosestTarget();
         if (closestTarget != null)
         {
             Move((closestTarget.position - transform.position).normalized);
