@@ -21,7 +21,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int numEnemies = 10;
 
     [Header("Room Objects")]
-    [SerializeField] GameObject triggerDoor;
     [SerializeField] GameObject keyDrop;
     
     public enum SpawnMode
