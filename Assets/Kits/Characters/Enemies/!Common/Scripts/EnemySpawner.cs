@@ -20,9 +20,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float spawnSpeed = 0.7f;
     [SerializeField] int numEnemies = 10;
 
-    [Header("Room Objects")]
+    [Header("Drops")]
     [SerializeField] GameObject keyDrop;
-    
+    [SerializeField] GameObject medikitDrop;
+    [SerializeField] float healthLeftToDrop = 0.5f;
+
+    [Header("Player")]
+    [SerializeField] Life playerLife;
+
     public enum SpawnMode
     {
         Line,
@@ -104,14 +109,38 @@ public class EnemySpawner : MonoBehaviour
         lastEnemyDeathPosition = deathPosition;
         aliveEnemies--;
 
-        if (aliveEnemies <= 0)
+        if (aliveEnemies > 0)
+        {
+            TryDropHealthKit();
+        } else
         {
             DropKey();
+        }
+    }
+    void TryDropHealthKit()
+    {
+        if (playerLife != null)
+        {
+            float ratio = playerLife.CurrentLife / playerLife.MaxLife;
+
+            if (ratio < healthLeftToDrop)
+            {
+                Instantiate(medikitDrop, lastEnemyDeathPosition, Quaternion.identity);
+            }
         }
     }
 
     void DropKey()
     {
-        Instantiate(keyDrop, lastEnemyDeathPosition, Quaternion.identity);
+        if (keyDrop != null)
+        {
+            Instantiate(keyDrop, lastEnemyDeathPosition, Quaternion.identity);
+        }
+    }
+
+    //--------- PUBLIC METHODS ---------//
+    public void LifeChangeHandler(float currentLife)
+    {
+        Debug.Log(currentLife);
     }
 }

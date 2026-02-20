@@ -12,20 +12,6 @@ public class BaseSkeleton : BaseCharacter
     EnemySpawner spawner;
 
     //--------- UNITY METHODS ---------//
-    public void Init(EnemySpawner spawner)
-    {
-        this.spawner = spawner;
-    }
-    public void OnDestroy()
-    {
-        if (spawner != null)
-        {
-            spawner.OnEnemyDied(transform.position);
-        }
-
-        Destroy(gameObject);
-    }
-
     protected override void Awake()
     {
         base.Awake();
@@ -40,5 +26,20 @@ public class BaseSkeleton : BaseCharacter
         {
             Move((closestTarget.position - transform.position).normalized);
         }
+    }
+
+    //--------- PUBLIC METHODS ---------//
+    public void Init(EnemySpawner spawner)
+    {
+        this.spawner = spawner;
+    }
+    public void OnDestroy()
+    {
+        if (spawner != null)
+        {
+            spawner.OnEnemyDied(transform.position);
+        }
+
+        Destroy(gameObject);
     }
 }
