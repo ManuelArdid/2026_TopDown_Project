@@ -11,6 +11,8 @@ public class BaseSkeleton : BaseCharacter
     //--------- CLASS VARIABLES ---------//
     float _nextDamageTime;
 
+    EnemySpawner spawner;
+
     //--------- PROTECTED VARIABLES ---------//
     protected Sight2D sight;
 
@@ -29,6 +31,22 @@ public class BaseSkeleton : BaseCharacter
         {
             Move((closestTarget.position - transform.position).normalized);
         }
+    }
+
+    //--------- PUBLIC METHODS ---------//
+    public void Init(EnemySpawner spawner)
+    {
+        this.spawner = spawner;
+    }
+    
+    public void OnDestroy()
+    {
+        if (spawner != null)
+        {
+            spawner.OnEnemyDied(transform.position);
+        }
+
+        Destroy(gameObject);
     }
 
     void OnCollisionStay2D(Collision2D c)
