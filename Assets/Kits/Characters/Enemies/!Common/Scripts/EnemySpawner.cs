@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Drops")]
     [SerializeField] GameObject keyDrop;
     [SerializeField] GameObject medikitDrop;
+    [SerializeField] GameObject decoyDrop;
     [SerializeField] float healthLeftToDrop = 0.5f;
 
     [Header("Player")]
@@ -111,15 +112,24 @@ public class EnemySpawner : MonoBehaviour
 
         if (aliveEnemies > 0)
         {
-            TryDropHealthKit();
+            float t = UnityEngine.Random.Range(0f, 1f);
+            if (t > 0.5f)
+            {
+                TryDropHealthKit();
+            } 
+            else
+            {
+                TryDropDecoy();
+            }
         } else
         {
-            DropKey();
+            TryDropKey();
         }
     }
+
     void TryDropHealthKit()
     {
-        if (playerLife != null)
+        if (playerLife != null && medikitDrop != null)
         {
             float ratio = playerLife.CurrentLife / playerLife.MaxLife;
 
@@ -129,8 +139,16 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+    void TryDropDecoy()
+    {
+        if (decoyDrop != null)
+        {
+            Instantiate(decoyDrop, lastEnemyDeathPosition, Quaternion.identity);
+        }
+    }
 
-    void DropKey()
+
+    void TryDropKey()
     {
         if (keyDrop != null)
         {
