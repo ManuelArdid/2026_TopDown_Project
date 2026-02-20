@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d8cd6a03258fa44806f3ca2b37d7af, type: 3}
   m_Name: Blue Key
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemDefinition
-  Image: {fileID: 21300028, guid: dda6bbdb704d84847b38f9eced72bf59, type: 3}
+  Image: {fileID: -1892680244700202587, guid: a30bb4b4fb4ec0348aeab3be3cf68a8c, type: 3}
   UniqueItemName: BlueKey
   HealthRecovery: 0
   Bullets: 0
