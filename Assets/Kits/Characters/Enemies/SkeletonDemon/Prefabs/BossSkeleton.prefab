@@ -371,9 +371,9 @@ GameObject:
   - component: {fileID: 977414364168644337}
   - component: {fileID: 5467400736306543008}
   - component: {fileID: 186318870641970123}
-  - component: {fileID: 6402436027592222887}
   - component: {fileID: 7815141015855068238}
   - component: {fileID: 9178248298156668526}
+  - component: {fileID: -2548476899182316949}
   m_Layer: 0
   m_Name: BossSkeleton
   m_TagString: Untagged
@@ -519,21 +519,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6402436027592222887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6094567233836696091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1718652925fd07498959a46d83f156a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseSkeleton
-  LinearSpeed: 3
-  Priority: 0
-  Side: 1
 --- !u!70 &7815141015855068238
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -592,3 +577,25 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-2548476899182316949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6094567233836696091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3af852a7d3ad4e3aaad33102b1c553f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KingSkeleton
+  LinearSpeed: 5
+  Priority: 0
+  Side: 2
+  ContactDamage: 0.2
+  DamageCooldown: 1
+  MeleeRange: 1.5
+  MeleeCooldown: 1
+  FireRate: 1.5
+  ProjectilePrefab: {fileID: 6732726048306034028, guid: 155c4a6f50b3f40758bfec42e84e4ff3,
+    type: 3}

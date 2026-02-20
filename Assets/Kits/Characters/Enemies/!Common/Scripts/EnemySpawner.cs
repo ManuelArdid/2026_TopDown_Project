@@ -3,7 +3,6 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -25,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject medikitDrop;
     [SerializeField] GameObject decoyDrop;
     [SerializeField] float healthLeftToDrop = 0.5f;
+
+    [SerializeField] protected AudioClip[] audioClips;
 
     [Header("Player")]
     [SerializeField] Life playerLife;
@@ -109,6 +110,11 @@ public class EnemySpawner : MonoBehaviour
     {
         lastEnemyDeathPosition = deathPosition;
         aliveEnemies--;
+
+        if (audioClips.Length > 0)
+        {
+            SoundFXManager.Instance.PlayRandomFXClip(audioClips, transform.position, 1.0f);
+        }
 
         if (aliveEnemies > 0)
         {

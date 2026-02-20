@@ -296,9 +296,9 @@ GameObject:
   - component: {fileID: 1185659234956514094}
   - component: {fileID: 8542260269171572456}
   - component: {fileID: 601078131139293351}
-  - component: {fileID: 4605087152265078646}
   - component: {fileID: 952011784897324453}
   - component: {fileID: 6857729921693434755}
+  - component: {fileID: -212200767310067382}
   m_Layer: 0
   m_Name: EnemyNinja
   m_TagString: Untagged
@@ -445,21 +445,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4605087152265078646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7203538904614142754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1718652925fd07498959a46d83f156a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BaseSkeleton
-  LinearSpeed: 5
-  Priority: 0
-  Side: 1
 --- !u!70 &952011784897324453
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -518,6 +503,27 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-212200767310067382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203538904614142754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a601f0d7ca09b4fba9050498d7b66a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArcherSkeleton
+  LinearSpeed: 5
+  Priority: 0
+  Side: 1
+  ContactDamage: 0.2
+  DamageCooldown: 1
+  PreferredDistance: 5
+  FireRate: 2
+  ProjectilePrefab: {fileID: 6732726048306034028, guid: 155c4a6f50b3f40758bfec42e84e4ff3,
+    type: 3}
 --- !u!1 &7722920478106976034
 GameObject:
   m_ObjectHideFlags: 0

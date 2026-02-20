@@ -53,6 +53,14 @@ MonoBehaviour:
   spawnSpeed: 0.7
   numEnemies: 10
   keyDrop: {fileID: 0}
+  medikitDrop: {fileID: 0}
+  decoyDrop: {fileID: 0}
+  healthLeftToDrop: 0.5
+  audioClips:
+  - {fileID: 8300000, guid: e7797966208b01a4bab51aa7bda52e93, type: 3}
+  - {fileID: 8300000, guid: fb866b0a954d96144a8604bd4170805f, type: 3}
+  - {fileID: 8300000, guid: abcc818a7ea7b544c8c5ccc03b166302, type: 3}
+  playerLife: {fileID: 0}
 --- !u!61 &5377187633548295762
 BoxCollider2D:
   m_ObjectHideFlags: 0
