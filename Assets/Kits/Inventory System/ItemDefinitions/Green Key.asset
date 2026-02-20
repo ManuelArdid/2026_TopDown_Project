@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Green Key
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemDefinition
   Image: {fileID: 21300028, guid: dda6bbdb704d84847b38f9eced72bf59, type: 3}
-  UniqueItemName: RedKey
+  UniqueItemName: GreenKey
   HealthRecovery: 0
   Bullets: 0
   NumUses: 1
