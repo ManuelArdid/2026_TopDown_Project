@@ -9,8 +9,23 @@ public class BaseSkeleton : BaseCharacter
     //--------- CLASS VARIABLES ---------//
 
     Sight2D _sight;
+    EnemySpawner spawner;
 
     //--------- UNITY METHODS ---------//
+    public void Init(EnemySpawner spawner)
+    {
+        this.spawner = spawner;
+    }
+    public void OnDestroy()
+    {
+        if (spawner != null)
+        {
+            spawner.OnEnemyDied(transform.position);
+        }
+
+        Destroy(gameObject);
+    }
+
     protected override void Awake()
     {
         base.Awake();
