@@ -71,6 +71,9 @@ public class InventoryItemUI : MonoBehaviour
 
     private void OnUse()
     {
+        ColorBlock colors = _buttons[(int)ButtonAction.Use].colors;
+        colors.pressedColor = Color.green;
+
         _inventoryUI.NotifyItemUsed(ItemDefinition);
         ItemDefinition.NumUses--;
 
