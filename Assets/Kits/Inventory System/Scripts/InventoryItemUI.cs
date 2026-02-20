@@ -9,17 +9,19 @@ public class InventoryItemUI : MonoBehaviour
 
     //-------- CLASS VARIABLES --------//
     private Button[] _buttons;
+    //private Button _buttons;
     private Image _itemImage;
     private TMP_Text _itemNameText;
     private InventoryUI _inventoryUI;
+    private string _itemName;
 
     //-------- ENUMS --------//
     enum ButtonAction
     {
-        Discard,
+        //Discard,
         Use,
-        Give,
-        Sell
+        //Give,
+        //Sell
     }
 
     //-------- UNITY METHODS --------//
@@ -38,18 +40,18 @@ public class InventoryItemUI : MonoBehaviour
 
     void OnEnable()
     {
-        _buttons[(int)ButtonAction.Discard].onClick.AddListener(OnDiscard);
+        //_buttons[(int)ButtonAction.Discard].onClick.AddListener(OnDiscard);
         _buttons[(int)ButtonAction.Use].onClick.AddListener(OnUse);
-        _buttons[(int)ButtonAction.Give].onClick.AddListener(OnGive);
-        _buttons[(int)ButtonAction.Sell].onClick.AddListener(OnSell);
+        //_buttons[(int)ButtonAction.Give].onClick.AddListener(OnGive);
+        //_buttons[(int)ButtonAction.Sell].onClick.AddListener(OnSell);
     }
 
     void OnDisable()
     {
-        _buttons[(int)ButtonAction.Discard].onClick.RemoveListener(OnDiscard);
+        //_buttons[(int)ButtonAction.Discard].onClick.RemoveListener(OnDiscard);
         _buttons[(int)ButtonAction.Use].onClick.RemoveListener(OnUse);
-        _buttons[(int)ButtonAction.Give].onClick.RemoveListener(OnGive);
-        _buttons[(int)ButtonAction.Sell].onClick.RemoveListener(OnSell);
+        //_buttons[(int)ButtonAction.Give].onClick.RemoveListener(OnGive);
+        //_buttons[(int)ButtonAction.Sell].onClick.RemoveListener(OnSell);
     }
 
     //-------- PUBLIC METHODS --------//
@@ -57,7 +59,8 @@ public class InventoryItemUI : MonoBehaviour
     {
         ItemDefinition = Instantiate(definition);
         _itemImage.sprite = definition.Image;
-        _itemNameText.text = definition.UniqueItemName;
+        _itemName = definition.UniqueItemName;
+        _itemNameText.text = $"{_itemName}, Usos: {ItemDefinition.NumUses}";
     }
 
     //-------- PRIVATE METHODS --------//
@@ -68,10 +71,13 @@ public class InventoryItemUI : MonoBehaviour
 
     private void OnUse()
     {
+        ColorBlock colors = _buttons[(int)ButtonAction.Use].colors;
+        colors.pressedColor = Color.green;
+
         _inventoryUI.NotifyItemUsed(ItemDefinition);
         ItemDefinition.NumUses--;
 
-        if (ItemDefinition.NumUses <= 0)
+        if (ItemDefinition.NumUses <= 0 && !_itemName.EndsWith("Key"))
         {
             Destroy(gameObject);
         }

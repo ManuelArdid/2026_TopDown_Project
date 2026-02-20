@@ -17,7 +17,9 @@ public class Life : MonoBehaviour
 
     //-------- CLASS VARIABLES --------//
     private float _currentLife;
-
+    public float CurrentLife => _currentLife;
+    public float MaxLife => StartingLife;
+    
     //--------- UNITY METHODS ---------//
     void OnValidate()
     {
